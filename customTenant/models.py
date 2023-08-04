@@ -1,9 +1,11 @@
 from django.db import models
-from django_tenants.models import TenantMixin, DomainMixin
+
+# Create your models here.
+from django.db import models
 from django.core.validators import RegexValidator
 
 
-class Client(TenantMixin):
+class User(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(
         max_length=15,
@@ -14,16 +16,3 @@ class Client(TenantMixin):
             )
         ],
     )
-
-    class Meta:
-        unique_together = (
-            "email",
-            "phone_number",
-        )
-
-    # default true, schema will be automatically created and synced when it is saved
-    auto_create_schema = True
-
-
-class Domain(DomainMixin):
-    pass
